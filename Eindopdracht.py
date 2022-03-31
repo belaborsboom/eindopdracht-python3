@@ -63,8 +63,6 @@ def boodschappen(dic, dic2):
   lijst2 = list(values2)
   for i in range(len(lijst2)):
     prijsboodschap = prijsboodschap + int(lijst2[i])
-    print(lijst2[i])
-    print(prijsboodschap)
   print("De prijs voor de boodschappen die jij hebt gekozen is " + str(prijsboodschap))
 
 def wijzigen(dic):
