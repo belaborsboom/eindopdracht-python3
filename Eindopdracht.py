@@ -74,6 +74,7 @@ def wijzigen(dic):
   if vraag8 == "product":
     vraag9 = input("Wat wordt de nieuwe naam")
     dic[vraag9] = dic[key2]
+    del dic[key2]
   elif vraag8 == "prijs":
     vraag10 = input("Wat wordt de nieuwe prijs? ")
     dic[key2] = vraag10
