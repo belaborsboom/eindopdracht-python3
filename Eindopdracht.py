@@ -2,15 +2,28 @@ totale_prijs = 0
 prijsboodschap = 0
 lijst = ()
 lijst2 = ()
+dic = {}
+dic2 = {}
 
-def aanmaken(dic):
-  print("als jij een boodschappenlijstje maakt met de prijzen erbij reken ik uit hoeveel het kost")
-  keuze1 = int(input("hoeveel dingen zitten er op het lijstje? "))
-  for i in range(keuze1):
-    a = i + 1
-    keuze2 = input("wat is het " + str(a) + "e boodschap? (graag niet een boodschap herhalen) ")
-    keuze3 = input("en wat is de prijs? ")
-    dic[keuze2] = keuze3
+def aanmaken(dict):
+  global dic
+  print("Normaal zou ik nu alle boodschappen die je kan kopen laten zien maar je kan ook zelf een assortiment aan boodschappen maken.")
+  keuze0 = input("Wil je zelf een assortiment maken? ").lower()
+  if keuze0 == "ja":
+    keuze1 = int(input("hoeveel dingen zitten er op het lijstje? "))
+    if not keuze1 == "":
+      for i in range(keuze1):
+        a = i + 1
+        keuze2 = input("wat is het " + str(a) + "e boodschap? (graag niet een boodschap herhalen) ")
+        keuze3 = input("en wat is de prijs? ")
+        dict[keuze2] = keuze3
+    else:
+      print("Ik vroeg hoeveel dingen er op zaten")
+  elif keuze0 == "nee":
+    dic = {"brood": 2, "water": 1, "sap": 3}
+    print("Ok dan is je assortiment nu dit: " + str(dic))
+  else:
+    print("Dat is geen antwoord")
 
 def zien(dic):
   global totale_prijs
@@ -18,17 +31,18 @@ def zien(dic):
   if vraag == "ja":
     print(dic)
   elif vraag == "nee":
-    print("ok dan niet")
+    print("Wat, waarom heb je anders zien ingetypt? ")
+    print("Om te weten wat de toale prijs is? ")
   else:
-    print("dat is geen antwoord")
+    print("Wat doe je nou weer? Dat is geen antwoord! ")
 
   values = dic.values()
   lijst = list(values)
   for i in range(len(lijst)):
     totale_prijs = totale_prijs + int(lijst[i])
-  vraag2 = input("wil je ook weten wat de totale prijs is? ").lower()
+  vraag2 = input("Wil je dan weten wat de totale prijs is? ").lower()
   if vraag2 == "ja":
-    print(totale_prijs, "euro")
+    print("de totale prijs is " + str(totale_prijs) + " euro")
   elif vraag2 == "nee":
     print("ok dan niet")
   else:
@@ -42,8 +56,7 @@ def toevoegen(dic):
     keuze4 = input("zeg nu de volgende boodschap (niet eentje herhalen) ")
     keuze5 = input("en wat is de prijs? ")
     dic[keuze4] = keuze5
-    print("dit is je boodschappenlijstje nu:")
-    print(dic)
+    print("Als je wil weten wat je boodschappenlijstje nu is, kan je gewoon zien doen. ")
   elif vraag3 == "nee":
     print("ok dan niet")
   else:
@@ -53,24 +66,25 @@ def boodschappen(dic, dic2):
   global prijsboodschap
   print("Ik laat nu zien wat er allemaal op je lijstje staat en moet je kiezen welke je koopt en dan laat ik zien hoeveel dat kost")
   print(dic)
-  vraag6 = input("Zeg nu de nummers van de boodschappen die je wil kopen.(voorbeeld als je de eerste en de twede wil kopen typ je 12) ")
-  for i in range(len(vraag6)):
-    nummer = int(vraag6[i]) - 1
-    key1 = list(dic)[nummer]
-    value123 = list(dic.values())[nummer]
-    dic2[key1] = value123
+  vraag7 = input("Hoeveel verschillende boodschappen wil je kopen? ")
+  for i in range(int(vraag7)):
+    vraag6 = input("Zeg nu de naam van de " + str(i+1) + "e die je wil kopen. ")
+    vraag8 = int(input("En hoeveel wil je ervan kopen? "))
+    value123 = int(dic[vraag6])
+    prijs = value123 * vraag8
+    dic2[vraag6] = prijs
   values2 = dic2.values()
   lijst2 = list(values2)
   for i in range(len(lijst2)):
     prijsboodschap = prijsboodschap + int(lijst2[i])
-  print("De prijs voor de boodschappen die jij hebt gekozen is " + str(prijsboodschap))
+  print("De prijs voor de boodschappen die jij hebt gekozen is " + str(prijsboodschap) + " euro")
 
 def wijzigen(dic):
   print(dic)
   vraag7 = input("Welke wil je veranderen? (als je de eerste wil veranderen dat typ je 1 etc.) ")
   number = int(vraag7) - 1
   key2 = str(list(dic)[number])
-  vraag8 = input("Wil je het product veranderen of de prijs? ")
+  vraag8 = input("Wil je het product veranderen of de prijs? ").lower()
   if vraag8 == "product":
     vraag9 = input("Wat wordt de nieuwe naam")
     dic[vraag9] = dic[key2]
@@ -86,6 +100,7 @@ def echt_stoppen():
   if vraag4 == "ja":
     print("ok ik stop hem")
   elif vraag4 == "nee":
+    print("Toch nog bedacht? ")
     return False
   else:
     print("dat was geen antwoord, ik stop het zelf wel")
@@ -94,16 +109,13 @@ def echt_stoppen():
 
 def menu():
   done = False
-  dic = {}
-  dic2 = {}
   while done == False:
-    # boodschappen()
     print("wat wil je doen?")
     if not dic == {}:
       keuzes = "zien, toevoegen, boodschappen, wijzigen of stop "
     elif dic == {}:
       keuzes = "aanmaken of stop "
-    vraag5 = input("je kan kiezen uit, " + keuzes).lower()
+    vraag5 = input("je kan kiezen uit " + keuzes).lower()
     if vraag5 == "aanmaken":
       aanmaken(dic)
     elif vraag5 == "zien":
