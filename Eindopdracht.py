@@ -30,7 +30,7 @@ def zien(boodschappen):
     print("Wat doe je nou weer? Dat is geen antwoord! ")
 
   for val in boodschappen.values():
-    totale_prijs = totale_prijs + val
+      totale_prijs = totale_prijs + val
   totale_prijs_vraag = input("Wil je dan weten wat de totale prijs is? ").lower()
   if totale_prijs_vraag == "ja":
     print("de totale prijs is " + str(totale_prijs) + " euro")
@@ -103,18 +103,18 @@ def main():
   keuzes = keuzes_check(boodschappen)
   while stoppen != "stop":
     keuzes = keuzes_check(boodschappen)
-    vraag5 = vragen_wat_te_doen(boodschappen, keuzes)
-    if vraag5 == "aanmaken":
+    wat_te_doen_vraag = vragen_wat_te_doen(boodschappen, keuzes)
+    if wat_te_doen_vraag == "aanmaken":
       aanmaken(boodschappen)
-    elif vraag5 == "zien":
+    elif wat_te_doen_vraag == "zien":
       zien(boodschappen)
-    elif vraag5 == "stop":
+    elif wat_te_doen_vraag == "stop":
       stoppen = echt_stoppen()
-    elif vraag5 == "toevoegen":
+    elif wat_te_doen_vraag == "toevoegen":
       toevoegen(boodschappen)
-    elif vraag5 == "boodschappen":
+    elif wat_te_doen_vraag == "boodschappen":
       boodschappendoen(boodschappen)
-    elif vraag5 == "wijzigen":
+    elif wat_te_doen_vraag == "wijzigen":
       wijzigen(boodschappen)
     else:
       print("wat typte je nou?")
